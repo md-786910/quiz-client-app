@@ -1,0 +1,21 @@
+ // check auth admin
+  async function auth() {
+    const { adminData, check } = await adminAuth();
+    if (check.status === 200 && adminData.message.isVerified) {
+      navigate("/admin/create");
+    } else {
+      navigate("/admin/login");
+    }
+  }
+
+
+      {q !== undefined && q.length !== 0 ? (
+            <TestCard quiz={q} que={ind + 1} />
+          ) : question.length !== 0 ? (
+            <TestCard quiz={question[0]} que={ind + 1} />
+          ) : (
+            ""
+          )}
+
+          REACT_APP_DEV = https://quiz-server-app-mob1-fmlbgehr5-md-786910.vercel.app
+REACT_APP_DEV1 =quiz-server-app-mob1-fmlbgehr5-md-786910.vercel.app
