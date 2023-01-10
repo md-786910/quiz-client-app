@@ -1,25 +1,28 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { userAuth, login } from "../actions/user_register_login";
-
+import Loader from "../../components/Loader";
 function UserLogin(props) {
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+  const [loader, setLoader] = useState(false);
   const handleUserText = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setUser({ ...user, [name]: value });
   };
   const loginUser = async () => {
+    setLoader(true);
     const { data, resp } = await login(user);
     const { userData, check } = await userAuth();
     if (resp.status === 200) {
       if (check.status === 200 && userData.message.isVerified) {
         props.checkUser(userData.message.isVerified);
         navigate("/user/testPage");
+        setLoader(false);
       } else {
         navigate("/user/login");
       }
@@ -106,6 +109,7 @@ function UserLogin(props) {
             </div>
           </div>
         </div>
+        {loader ? <Loader /> : ""}
       </section>
     </>
   );

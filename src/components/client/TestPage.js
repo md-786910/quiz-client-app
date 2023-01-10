@@ -230,10 +230,11 @@ function TestPage() {
         >
           <div className="result">
             <h2>
-              Your score:{" "}
-              {data1.reduce(function (previousValue, currentValue) {
-                return previousValue + currentValue.answer;
-              }, 0)}
+              Your score:
+              {isCompleted &&
+                data1.reduce(function (previousValue, currentValue) {
+                  return previousValue + currentValue.answer;
+                }, 0)}
             </h2>
           </div>
 

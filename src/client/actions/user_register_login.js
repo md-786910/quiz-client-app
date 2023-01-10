@@ -1,8 +1,7 @@
 const url =
-  process.env === "devlopment"
+  process.env.NODE_ENV === "development"
     ? process.env.REACT_APP_DEV
     : process.env.REACT_APP_PROD;
-
 const register = async (user) => {
   try {
     const resp = await fetch(`${url}/userRegister`, {

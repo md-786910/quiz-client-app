@@ -1,25 +1,28 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { adminAuth, login } from "../actions/register_login";
-
+import Loader from "../../components/Loader";
 function Login(props) {
   const navigate = useNavigate();
   const [admin, setAdmin] = useState({
     email: "",
     password: "",
   });
+  const [loader, setLoader] = useState(false);
   const handleAdminText = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setAdmin({ ...admin, [name]: value });
   };
   const loginAdmin = async () => {
+    setLoader(true);
     const { data, resp } = await login(admin);
     const { adminData, check } = await adminAuth();
     if (resp.status === 200) {
       if (check.status === 200 && adminData.message.isVerified) {
         props.checkAdmin(adminData.message.isVerified);
         navigate("/admin/create");
+        setLoader(false);
       } else {
         alert(adminData.message);
       }
@@ -106,6 +109,7 @@ function Login(props) {
             </div>
           </div>
         </div>
+        {loader ? <Loader /> : ""}
       </section>
     </>
   );
