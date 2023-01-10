@@ -72,7 +72,7 @@ function Quizz() {
         alert("please create question perfectly");
       } else {
         createQuestion(prob);
-        window.location.reload();
+        // window.location.reload();
         getQues();
       }
     } catch (error) {
